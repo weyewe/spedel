@@ -28,4 +28,8 @@ $(function () {
         $("html, body").animate({ scrollTop: top }, 700);
         return false;
     });
+
+		$("a.no_click").live("click", function(){
+			return false 
+		});
 });
