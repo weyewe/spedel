@@ -23,6 +23,7 @@ BACKEND_IMAGE_URL = {
  
  
 FRONTPAGE_IMAGE_URL = { 
+  :spedel_logo => 'http://s3.amazonaws.com/spedel-frontpage/spedel_logo.jpg',
   # theme
   :nav_bg => 'http://s3.amazonaws.com/spedel-frontpage/nav_bg.jpg',
   :chart_1 => 'http://s3.amazonaws.com/spedel-frontpage/chart1.png',
@@ -46,7 +47,7 @@ FRONTPAGE_IMAGE_URL = {
   
   # index.html #testimonial
   :pic_1 => 'http://s3.amazonaws.com/spedel-frontpage/pic1.jpg',
-  :pic_blog => 'http://s3.amazonaws.com/spedel-frontpage/pic_blog.png',
+  :pic_blog => 'http://s3.amazonaws.com/spedel-frontpage/delfi.jpg',
   
   # SLIDESHOW
   :spedel_banner => 'http://s3.amazonaws.com/spedel-frontpage/banner_spedel.jpg',
