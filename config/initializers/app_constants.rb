@@ -1,6 +1,8 @@
 COMPANY_NAME = "Spedel"
 COMPANY_MOTO = "Speed Delivery"
 
+COMPANY_DESCRIPTION= 'Ada keperluan mendadak dan urgent untuk mengirimkan barang? Pengiriman kilat dalam kota dengan batas waktu pengiriman 3 jam'
+
 USER_ROLE = {
   :branch_manager => "BranchManager",
   :cashier => "Cashier",
