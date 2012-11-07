@@ -46,7 +46,18 @@ FRONTPAGE_IMAGE_URL = {
   
   # index.html #testimonial
   :pic_1 => 'http://s3.amazonaws.com/spedel-frontpage/pic1.jpg',
-  :pic_blog => 'http://s3.amazonaws.com/spedel-frontpage/pic_blog.png'
+  :pic_blog => 'http://s3.amazonaws.com/spedel-frontpage/pic_blog.png',
+  
+  # SLIDESHOW
+  :spedel_banner => 'http://s3.amazonaws.com/spedel-frontpage/banner_spedel.jpg',
+  :full_armada => 'http://s3.amazonaws.com/spedel-frontpage/full_armada.jpg',
+  :collate => 'http://s3.amazonaws.com/spedel-frontpage/collate.jpg',
+  
+  # FEATURES 
+  :quick_and_fast => 'http://s3.amazonaws.com/spedel-frontpage/armada_2.jpg',
+  :safe_standardized => 'http://s3.amazonaws.com/spedel-frontpage/morning_training.jpg' , 
+  :best_cs => 'http://s3.amazonaws.com/spedel-frontpage/cs_big.jpg'
+  
 }
 
 SHOWLOADING_LOADER_URL = "http://s3.amazonaws.com/circle-static-assets/loading.gif"
