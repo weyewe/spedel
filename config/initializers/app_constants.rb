@@ -23,6 +23,7 @@ BACKEND_IMAGE_URL = {
  
  
 FRONTPAGE_IMAGE_URL = { 
+  :favicon => 'http://s3.amazonaws.com/spedel-frontpage/favicon_delfi.png',
   :spedel_logo => 'http://s3.amazonaws.com/spedel-frontpage/spedel_logo.jpg',
   # theme
   :nav_bg => 'http://s3.amazonaws.com/spedel-frontpage/nav_bg.jpg',
