@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.8'
+gem 'rails', '3.2.11'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -37,6 +37,12 @@ gem "daemons"
 gem 'simple_form'
 gem 'i18n'
 
+gem 'awesome_nested_set'
+# gem 'jquery-rails'
+gem "cancan"
+
+gem 'the_role'
+
 gem "mongrel", "~> 1.2.0.pre2"
 
 
@@ -64,6 +70,19 @@ group :assets do
 end
 
 gem 'jquery-rails'
+
+group :development, :test do 
+  
+  gem "rspec-rails", "~> 2.6"
+  gem "factory_girl_rails", "~> 4.0"
+  # gem "faker"
+end
+
+
+group :test do
+  # Pretty printed test output
+  gem 'turn', :require => false
+end
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
