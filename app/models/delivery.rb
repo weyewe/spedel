@@ -3,7 +3,7 @@ class Delivery < ActiveRecord::Base
   belongs_to :customer
   belongs_to :company 
   
-  validates_presence_of :discount, :customer_id 
+  validates_presence_of :discount, :customer_id , :delivery_scenario_id 
   
   
   validate :discount_below_upper_limit
@@ -17,9 +17,15 @@ class Delivery < ActiveRecord::Base
   end
   
   def generate_price 
-    price = Price.current_active_price( self.customer_id, self.delivery_scenario_id )
+    price = BigDecimal('0')
+    if self.customer.is_corporate_customer?
+      price = Price.current_active_price( self.customer_id, self.delivery_scenario_id )
+    else
+      price = Price.current_active_price( nil , self.delivery_scenario_id )
+    end
     
-    self.amount = ( 100 - discount ) * price.price 
+    
+    self.amount = ( 100 - discount ) * price.price / 100.to_f
     self.save 
   end
   

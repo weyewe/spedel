@@ -41,13 +41,40 @@ ActiveRecord::Schema.define(:version => 20130128093702) do
     t.text     "office_address"
     t.boolean  "is_corporate_customer", :default => false
     t.boolean  "is_deleted",            :default => false
+    t.boolean  "is_delayed_payment",    :default => false
     t.datetime "created_at",                               :null => false
     t.datetime "updated_at",                               :null => false
   end
 
   create_table "deliveries", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "code"
+    t.integer  "company_id"
+    t.integer  "creator_id"
+    t.integer  "customer_id"
+    t.integer  "project_id"
+    t.integer  "drop_center_id"
+    t.integer  "case",                                               :default => 1
+    t.integer  "delivery_scenario_id"
+    t.integer  "price_id"
+    t.decimal  "discount",             :precision => 5, :scale => 2, :default => 0.0
+    t.text     "discount_note"
+    t.decimal  "amount",               :precision => 9, :scale => 2, :default => 0.0
+    t.integer  "employee_id"
+    t.text     "pickup_address"
+    t.text     "delivery_address"
+    t.boolean  "is_picked_up",                                       :default => false
+    t.datetime "pickup_time"
+    t.boolean  "is_delivered",                                       :default => false
+    t.datetime "delivery_time"
+    t.boolean  "is_approved",                                        :default => false
+    t.datetime "approval_time"
+    t.boolean  "is_canceled",                                        :default => false
+    t.integer  "cancel_case",                                        :default => 1
+    t.text     "cancel_note"
+    t.boolean  "is_paid",                                            :default => false
+    t.integer  "payment_approver_id"
+    t.datetime "created_at",                                                            :null => false
+    t.datetime "updated_at",                                                            :null => false
   end
 
   create_table "delivery_areas", :force => true do |t|
@@ -76,6 +103,7 @@ ActiveRecord::Schema.define(:version => 20130128093702) do
     t.integer  "year"
     t.integer  "month"
     t.boolean  "is_deleted",   :default => false
+    t.integer  "company_id"
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false
   end
