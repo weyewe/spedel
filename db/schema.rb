@@ -68,6 +68,8 @@ ActiveRecord::Schema.define(:version => 20130128093702) do
     t.datetime "delivery_time"
     t.boolean  "is_approved",                                        :default => false
     t.datetime "approval_time"
+    t.integer  "approver_id"
+    t.datetime "approved_at"
     t.boolean  "is_canceled",                                        :default => false
     t.integer  "cancel_case",                                        :default => 1
     t.text     "cancel_note"
@@ -95,15 +97,13 @@ ActiveRecord::Schema.define(:version => 20130128093702) do
   end
 
   create_table "employees", :force => true do |t|
+    t.integer  "creator_id"
+    t.integer  "company_id"
     t.string   "name"
     t.string   "code"
     t.string   "mobile_phone"
     t.text     "address"
-    t.integer  "creator_id"
-    t.integer  "year"
-    t.integer  "month"
     t.boolean  "is_deleted",   :default => false
-    t.integer  "company_id"
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false
   end

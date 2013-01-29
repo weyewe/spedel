@@ -42,6 +42,8 @@ class CreateDeliveries < ActiveRecord::Migration
       # FINALIZING delivery can happen in 2 ways: approved => that the delivery is done, or it is cancelled
       # approval means: the employee has the right to get comission. the customer is well served 
       t.boolean :is_approved, :default => false
+      t.integer :approver_id 
+      t.datetime :approved_at 
       t.boolean :is_canceled , :default => false
       t.integer :cancel_case , :default => DELIVERY_CANCEL_CASE[:phone_cancel]
       t.text :cancel_note 

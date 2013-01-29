@@ -2,6 +2,7 @@ class Delivery < ActiveRecord::Base
   # attr_accessible :title, :body
   belongs_to :customer
   belongs_to :company 
+  belongs_to :employee
   
   validates_presence_of :discount, :customer_id , :delivery_scenario_id 
   
@@ -95,7 +96,51 @@ class Delivery < ActiveRecord::Base
     
     
     return self 
-    
   end
   
+  def update_pickup(employee, params)
+    self.is_picked_up = params[:is_picked_up]
+    self.pickup_time  = params[:pickup_time]
+    self.save
+  end
+  
+  
+  def update_delivery(employee, params)
+    self.is_delivered = params[:is_delivered]
+    self.delivery_time  = params[:delivery_time]
+    self.save
+  end
+  
+  def assign_employee(  employee )
+    if employee.nil?
+      errors.add(:employee_id , "Harus memilih karyawan" )
+      return self 
+    end
+    
+    self.employee_id = employee.id 
+    self.save
+    return self 
+  end
+  
+  def approve( employee ) 
+    return nil if self.is_approved == true 
+    return nil if self.is_canceled == true 
+    return nil if employee.nil? 
+    customer = self.customer 
+    
+    ActiveRecord::Base.transaction do
+      self.is_approved = true 
+      self.approver_id = employee.id 
+      self.approved_at = DateTime.now 
+      self.save
+      
+      self.mark_as_paid(employee) if not customer.is_delayed_payment? 
+    end
+  end
+  
+  def mark_as_paid(employee)
+    self.is_paid = true 
+    self.payment_approver_id = employee.id 
+    self.save
+  end
 end

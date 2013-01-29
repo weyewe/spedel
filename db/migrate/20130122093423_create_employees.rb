@@ -1,6 +1,9 @@
 class CreateEmployees < ActiveRecord::Migration
   def change
     create_table :employees do |t|
+      t.integer :creator_id  
+      t.integer :company_id 
+
       t.string :name 
       t.string :code 
       
@@ -8,13 +11,10 @@ class CreateEmployees < ActiveRecord::Migration
       t.text :address 
       
       
-      t.integer :creator_id 
-      t.integer :year
-      t.integer :month 
+     
       t.boolean :is_deleted , :default => false
       
-      t.integer :company_id
-      t.integer :creator_id 
+     
       
       t.timestamps
     end

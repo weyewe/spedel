@@ -244,9 +244,59 @@ describe Delivery do
   # 3. approved   => pass the receipt 
   # 4. paid  => pass the $$  # if instant delivery, automatically mark as paid . 
   # 5. CANCELed 
+  
+  # the pick up and delivery information is not essential. can be updated anytime. 
+  # the essential part is approval and cancel 
+  
+  # might as well just leave the logic for now
   context "update delivery progress" do
+    before(:each) do
+      @delivery = Delivery.create_by_employee( @admin, {
+        :delivery_scenario_id => @first_ds.id , 
+        :customer_id => @customer.id ,
+        :pickup_address => "This is the awesome pickup address", 
+        :delivery_address => "This is the awesome delivery address",
+        :discount => '0'
+      })
+    end
+    
+    it 'should update pickup time' do
+      time = DateTime.now 
+      @delivery.update_pickup(@admin, {
+        :is_picked_up => true,
+        :pickup_time => time
+      })
+      
+      @delivery.is_picked_up.should be_true 
+      @delivery.pickup_time.should == time
+    end
+    
+    it 'should update delivery_time' do
+      time = DateTime.now 
+      @delivery.update_delivery(@admin, {
+        :is_delivered => true,
+        :delivery_time => time
+      })
+      
+      @delivery.is_delivered.should be_true 
+      @delivery.delivery_time.should == time
+    end
+    
     context "finalize delivery : through approval" do
-      context "public delivery"
+      before(:each) do
+        time = DateTime.now 
+        @delivery.update_pickup(@admin, {
+          :is_picked_up => true,
+          :pickup_time => time
+        })
+        
+        @delivery.update_delivery(@admin, {
+          :is_delivered => true,
+          :delivery_time => time
+        })
+      end
+      
+      context "public delivery: approval in delivery == payment received"  
       
       context "corporate delivery: the payment is flexible, can be monthly or weekly"
     end
