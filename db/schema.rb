@@ -70,8 +70,11 @@ ActiveRecord::Schema.define(:version => 20130128093702) do
     t.datetime "approval_time"
     t.integer  "approver_id"
     t.datetime "approved_at"
+    t.integer  "canceler_id"
+    t.datetime "cancel_datetime"
     t.boolean  "is_canceled",                                        :default => false
     t.integer  "cancel_case",                                        :default => 1
+    t.decimal  "cancelation_fee",      :precision => 9, :scale => 2, :default => 0.0
     t.text     "cancel_note"
     t.boolean  "is_paid",                                            :default => false
     t.integer  "payment_approver_id"

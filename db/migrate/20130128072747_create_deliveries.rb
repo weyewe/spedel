@@ -44,15 +44,22 @@ class CreateDeliveries < ActiveRecord::Migration
       t.boolean :is_approved, :default => false
       t.integer :approver_id 
       t.datetime :approved_at 
+      t.integer :canceler_id 
+      t.datetime :cancel_datetime
       t.boolean :is_canceled , :default => false
-      t.integer :cancel_case , :default => DELIVERY_CANCEL_CASE[:phone_cancel]
+      t.integer :cancel_case , :default => DELIVERY_CANCEL_CASE[:phone_cancel][:value]
+      t.decimal :cancelation_fee   , :precision => 9, :scale => 2 , :default => 0  # 100% max  
       t.text :cancel_note 
       
       # has the delivery paid? we must cater to customer that wants to pay per delivery, 
       # or monthly payment. => monthly payment option is for corporate customer 
       
       t.boolean :is_paid, :default => false 
+      t.integer :payment_case , :default => PAYMENT_CASE[:cash_on_delivery]
       t.integer :payment_approver_id 
+      
+      t.integer :invoice_id  
+      # those with invoice id can't be paid with cash. its payment is levied to INVOICE 
       
 
       

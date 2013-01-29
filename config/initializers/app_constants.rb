@@ -152,7 +152,22 @@ DELIVERY_CASE = {
 }
 
 DELIVERY_CANCEL_CASE = {
-  :phone_cancel => 1,  
-  :no_pickup => 2, 
-  :no_delivery => 3 
+  :phone_cancel           => {
+    :value        => 1, 
+    :name         => "Batal melalui telpon" 
+  } ,
+  :no_pickup           =>  {
+    :value        => 2, 
+    :name         => "Tidak ada penjemputan"
+  } ,
+  :no_delivery           =>  {
+    :value        => 2, 
+    :name         => "Tidak ada penerima"
+  }
 }
+
+PAYMENT_CASE = {
+  :cash_on_delivery => 1 , 
+  :invoice_payment =>  2 
+}
+ 

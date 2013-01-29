@@ -144,4 +144,38 @@ class Delivery < ActiveRecord::Base
     self.payment_approver_id = employee.id 
     self.save
   end
+  
+  def validate_cancelation_data
+    if  self.cancelation_fee.present?  and self.cancelation_fee < BigDecimal('0')
+      errors.add(:cancelation_fee , "Harus lebih besar dari 0" ) 
+    end
+    
+    if not self.cancel_case.present? 
+      errors.add(:cancelation_fee , "Harus dipilih" ) 
+    end
+  end
+  
+  def cancel(employee, params )
+    return nil if self.is_canceled == true 
+    return nil if self.is_approved == true 
+    
+    self.is_canceled = true
+    self.canceler_id  = employee.id 
+    self.cancel_datetime = DateTime.now 
+    
+    if params[:cancelation_fee].nil?
+      self.cancelation_fee  = BigDecimal('0')
+    else
+      self.cancelation_fee = BigDecimal( params[:cancelation_fee])
+    end
+    
+    self.cancel_note     = params[:cancel_note]
+    self.cancel_case     = params[:cancel_case]
+    
+    validate_cancelation_data  
+    
+    self.save if self.errors.size == 0 
+    
+    return self
+  end
 end

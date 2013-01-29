@@ -121,27 +121,36 @@ describe Delivery do
     })
     @delivery.reload 
   end # end of before(:each)
- 
-  # sanity check that the delivery is ripe for approval
-  it 'should be picked up and delivered' do
-    @delivery.is_picked_up.should be_true
-    @delivery.is_delivered.should be_true 
+  
+  it 'should allow cancel' do
+    @delivery.cancel(@admin, {
+      :cancel_case => DELIVERY_CANCEL_CASE[:phone_cancel][:value],
+      :cancelation_fee => '150000',
+      :cancel_note => 'Orang nya tidak ada. salah pengantaran'
+    })
+    
+    @delivery.is_canceled.should be_true 
   end
   
-  it 'should allow employee assignment' do
-    @delivery.assign_employee( @employee_1 )
+  context "post cancel" do
+    before(:each) do
+      @cancelation_fee = 150000
+      @delivery.cancel(@admin, {
+        :cancel_case => DELIVERY_CANCEL_CASE[:phone_cancel][:value],
+        :cancelation_fee =>  @cancelation_fee.to_s ,
+        :cancel_note => 'Orang nya tidak ada. salah pengantaran'
+      })
+    end
     
-    @delivery.employee_id.should == @employee_1 .id
+    it 'should have been canceled'  do
+      @delivery.is_canceled.should be_true 
+      @delivery.canceler_id.should == @admin.id 
+    end
+     
+     
+     # outstanding payment logic => based on the play between A vs B 
   end
   
-  it 'should mark as paid (SPECIAL FOR PUBLIC DELIVERY) and approved, upon approval' do
-    @delivery.assign_employee( @employee_1 )
-    @delivery.approve( @admin ) 
-    
-    @delivery.is_paid.should == true 
-    @delivery.is_approved.should == true 
-    @delivery.approver_id.should == @admin.id 
-  end
   
 end
   
