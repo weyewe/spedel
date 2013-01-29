@@ -15,7 +15,7 @@ class Customer < ActiveRecord::Base
     
     if is_corporate
       new_object.contact_person        = params[:contact_person] 
-      new_object.is_delayed_payment    = params[:contact_person] 
+      new_object.is_delayed_payment    = params[:is_delayed_payment] 
       new_object.mobile                = params[:mobile]         
       new_object.email                 = params[:email]          
       new_object.bbm_pin               = params[:bbm_pin]        
@@ -43,7 +43,7 @@ class Customer < ActiveRecord::Base
     
     if self.is_corporate_customer? 
       self.contact_person     = params[:contact_person] 
-      self.is_delayed_payment = params[:contact_person] 
+      self.is_delayed_payment = params[:is_delayed_payment] 
       self.mobile             = params[:mobile]         
       self.email              = params[:email]          
       self.bbm_pin            = params[:bbm_pin]        

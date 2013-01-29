@@ -128,6 +128,7 @@ class Delivery < ActiveRecord::Base
     return nil if employee.nil? 
     customer = self.customer 
     
+    
     ActiveRecord::Base.transaction do
       self.is_approved = true 
       self.approver_id = employee.id 
