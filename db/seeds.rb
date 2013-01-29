@@ -68,13 +68,13 @@ total_scenarios = different_area_delivery_scenarios + same_area_delivery_scenari
 count = 1 
 company.delivery_scenarios.each do |delivery_scenario|
   price = count*1000
-  delivery_scenario.set_price(  @admin, price.to_s  )
+  # delivery_scenario.set_price(  @admin, price.to_s  )
   
-  # Price.create_by_employee( @admin, {
-  #   :delivery_scenario_id => delivery_scenario.id , 
-  #   :price => price.to_s ,
-  #   :customer_id => nil 
-  # })
+  Price.create_public_price_by_employee( @admin, {
+    :delivery_scenario_id => delivery_scenario.id , 
+    :price => price.to_s ,
+    :customer_id => nil 
+  })
   count++ 
   # create public pricing for delivery scenario 
 end
@@ -84,7 +84,7 @@ count = 1
 company.delivery_scenarios.each do |delivery_scenario|
   price = count*1000
   
-  Price.create_corporate_price( @admin, {
+  Price.create_corporate_price_by_employee( @admin, {
     :delivery_scenario_id => delivery_scenario.id , 
     :price => price.to_s ,
     :customer_id => corp_customer_1.id 

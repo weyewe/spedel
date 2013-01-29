@@ -145,3 +145,14 @@ CALLING_NUMBER_CASE = {
   :main => 1, 
   :additional => 2  
 }
+
+DELIVERY_CASE = {
+  :normal => 1, 
+  :project => 2 
+}
+
+DELIVERY_CANCEL_CASE = {
+  :phone_cancel => 1,  
+  :no_pickup => 2, 
+  :no_delivery => 3 
+}

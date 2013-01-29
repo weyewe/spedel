@@ -81,11 +81,12 @@ ActiveRecord::Schema.define(:version => 20130128093702) do
   end
 
   create_table "prices", :force => true do |t|
+    t.integer  "creator_id"
     t.integer  "company_id"
     t.integer  "delivery_scenario_id"
-    t.boolean  "is_active",                                          :default => true
     t.integer  "customer_id"
     t.decimal  "price",                :precision => 9, :scale => 2, :default => 0.0
+    t.boolean  "is_active",                                          :default => true
     t.datetime "created_at",                                                           :null => false
     t.datetime "updated_at",                                                           :null => false
   end

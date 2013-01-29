@@ -24,6 +24,8 @@ class CreateCustomers < ActiveRecord::Migration
       t.boolean :is_corporate_customer, :default => false 
        
       t.boolean :is_deleted, :default  => false
+      
+      t.boolean :is_delayed_payment, :default => false 
 
       t.timestamps
     end

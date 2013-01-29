@@ -13,13 +13,14 @@ class Customer < ActiveRecord::Base
     new_object.phone      = params[:phone] 
     
     
-    if is_corporate 
-      new_object.contact_person = params[:contact_person] 
-      new_object.mobile         = params[:mobile]         
-      new_object.email          = params[:email]          
-      new_object.bbm_pin        = params[:bbm_pin]        
-      new_object.office_address = params[:office_address]  
-      new_object.is_corporate   = is_corporate 
+    if is_corporate
+      new_object.contact_person        = params[:contact_person] 
+      new_object.is_delayed_payment    = params[:contact_person] 
+      new_object.mobile                = params[:mobile]         
+      new_object.email                 = params[:email]          
+      new_object.bbm_pin               = params[:bbm_pin]        
+      new_object.office_address        = params[:office_address]  
+      new_object.is_corporate_customer = is_corporate 
     end
     
     
@@ -41,11 +42,12 @@ class Customer < ActiveRecord::Base
     self.phone      = params[:phone] 
     
     if self.is_corporate_customer? 
-      self.contact_person   = params[:contact_person] 
-      self.mobile           = params[:mobile]         
-      self.email            = params[:email]          
-      self.bbm_pin          = params[:bbm_pin]        
-      self.office_address   = params[:office_address]  
+      self.contact_person     = params[:contact_person] 
+      self.is_delayed_payment = params[:contact_person] 
+      self.mobile             = params[:mobile]         
+      self.email              = params[:email]          
+      self.bbm_pin            = params[:bbm_pin]        
+      self.office_address     = params[:office_address]  
     end
     
     if self.save 
